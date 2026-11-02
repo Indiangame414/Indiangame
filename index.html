@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#07080f">
+<title>Spend Billionaire &amp; Leader Money</title>
+<style>
+:root{--bg:#07080f;--card:#11131f;--card2:#171a2b;--line:#262a42;--txt:#eef1ff;--mut:#8b91b3;--neon:#00f0ff;--pink:#ff2bd6;--green:#39ff88;--red:#ff4466;--gold:#ffd24a}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{background:radial-gradient(900px 500px at 10% -10%,#1b0f3a 0,transparent 60%),radial-gradient(800px 500px at 100% 0,#06304a 0,transparent 55%),var(--bg);color:var(--txt);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;min-height:100vh;font-size:16px;padding-bottom:90px}
+button{font:inherit;color:inherit;cursor:pointer;border:0}
+.hidden{display:none!important}
+.wrap{max-width:1200px;margin:0 auto;padding:16px}
+/* select screen */
+.hero{text-align:center;padding:28px 8px 12px}
+.hero h1{font-size:clamp(28px,7vw,52px);font-weight:900;line-height:1.1;background:linear-gradient(90deg,var(--neon),var(--pink),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 18px #00f0ff44)}
+.hero p{color:var(--mut);margin-top:10px;font-size:17px}
+.people{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px;margin-top:22px}
+.pcard{background:linear-gradient(160deg,var(--card2),var(--card));border:1px solid var(--line);border-radius:24px;padding:22px 16px;text-align:center;transition:.25s;position:relative;overflow:hidden;animation:rise .6s both}
+.pcard:hover{transform:translateY(-6px);border-color:var(--neon);box-shadow:0 0 30px #00f0ff33}
+.pcard .ph{width:170px;height:170px;margin:0 auto 14px}
+.pcard h2{font-size:22px}
+.pcard .nw{color:var(--green);font-weight:800;font-size:20px;margin:6px 0 14px;text-shadow:0 0 12px #39ff8855}
+.photo{border-radius:50%;overflow:hidden;border:3px solid transparent;background:linear-gradient(var(--card),var(--card)) padding-box,linear-gradient(135deg,var(--neon),var(--pink)) border-box;box-shadow:0 0 24px #ff2bd633;display:flex;align-items:center;justify-content:center}
+.photo img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
+.fb{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-weight:900;background:linear-gradient(135deg,#25104a,#06404f);color:#fff;font-size:2.2em;text-shadow:0 0 14px var(--neon)}
+.btn{background:linear-gradient(90deg,var(--neon),var(--pink));color:#05060c;font-weight:800;padding:12px 22px;border-radius:14px;transition:.2s;font-size:16px}
+.btn:hover{filter:brightness(1.15);transform:scale(1.03)}
+.btn:active{transform:scale(.96)}
+/* header */
+header{position:sticky;top:0;z-index:50;background:#0a0c16ee;backdrop-filter:blur(14px);border-bottom:1px solid var(--line);padding:10px 14px;padding-top:max(10px,env(safe-area-inset-top))}
+.hrow{display:flex;align-items:center;gap:10px;max-width:1200px;margin:0 auto}
+.hrow .photo{width:54px;height:54px;flex:none}
+.hname{font-weight:800;font-size:16px;line-height:1.1}
+.hname small{display:block;color:var(--mut);font-weight:500;font-size:12px}
+.bal{margin-left:auto;text-align:right}
+.bal b{font-size:clamp(20px,5.5vw,30px);color:var(--green);text-shadow:0 0 14px #39ff8866;display:block;line-height:1.05}
+.bal small{color:var(--mut);font-size:12px}
+.hrow2{display:flex;align-items:center;gap:8px;max-width:1200px;margin:8px auto 0;flex-wrap:wrap}
+.stat{font-size:13px;color:var(--mut)}.stat b{color:var(--txt)}
+.pbar{flex:1 1 100%;height:10px;background:#1a1d30;border-radius:9px;overflow:hidden;order:5}
+.pbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--neon),var(--pink));box-shadow:0 0 12px var(--pink);transition:width .4s}
+.tb{background:var(--card2);border:1px solid var(--line);border-radius:12px;padding:8px 12px;font-size:14px;font-weight:700;transition:.2s}
+.tb:hover{border-color:var(--neon)}
+.tb.on{background:var(--neon);color:#05060c;border-color:var(--neon)}
+.spacer{margin-left:auto;display:flex;gap:6px}
+/* categories */
+.cats{display:flex;gap:10px;overflow-x:auto;padding:14px 2px;scrollbar-width:none}
+.cats::-webkit-scrollbar{display:none}
+.cat{flex:none;background:var(--card2);border:1px solid var(--line);padding:12px 18px;border-radius:30px;font-weight:700;font-size:15px;transition:.2s;white-space:nowrap}
+.cat.on{background:linear-gradient(90deg,var(--neon),var(--pink));color:#05060c;border-color:transparent;box-shadow:0 0 18px #00f0ff55}
+/* products */
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.ctitle{font-size:clamp(24px,5vw,38px);font-weight:900;letter-spacing:2px;margin-top:14px;color:var(--neon);text-shadow:0 0 16px #00f0ff66}
+.prod{background:linear-gradient(170deg,var(--card2),var(--card));border:1px solid var(--line);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;transition:.25s;animation:rise .5s both}
+.prod:hover{transform:translateY(-4px);border-color:var(--pink);box-shadow:0 0 26px #ff2bd62e}
+.prod.owned{border-color:#39ff8888}
+.pimg{aspect-ratio:4/3;background:#0b0d18;position:relative}
+.pimg img{width:100%;height:100%;object-fit:cover;display:block}
+.pimg .fb{font-size:70px}
+.meta{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.qty{background:#000b;border:1px solid var(--green);color:var(--green);font-weight:800;padding:4px 10px;border-radius:20px;font-size:13px;white-space:nowrap}
+.pb{padding:14px;display:flex;flex-direction:column;gap:6px;flex:1}
+.pb h3{font-size:19px}
+.pb{justify-content:space-between}
+.price{font-weight:800;color:var(--gold);font-size:18px}.price small{display:block;color:var(--mut);font-weight:600;font-size:13px}
+.acts{display:flex;gap:10px;margin-top:6px}
+.acts button{flex:1;padding:14px 8px;border-radius:13px;font-weight:800;font-size:16px;transition:.15s}
+.buy{background:var(--green);color:#03150a}.sell{background:#2a1020;color:var(--red);border:1px solid var(--red)}
+.acts button:active{transform:scale(.94)}.acts button:disabled{opacity:.35}
+.shake{animation:shake .4s}
+/* receipt */
+.receipt{margin-top:30px;background:linear-gradient(170deg,var(--card2),var(--card));border:1px solid var(--neon);border-radius:22px;padding:20px;box-shadow:0 0 30px #00f0ff22}
+.receipt h2{font-size:26px;margin-bottom:12px}
+.rhead{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.rhead .photo{width:76px;height:76px}
+table{width:100%;border-collapse:collapse}
+td,th{padding:10px 6px;border-bottom:1px dashed var(--line);text-align:left;font-size:15px}
+th{color:var(--mut)}td:last-child,th:last-child{text-align:right}
+.rsum{margin-top:14px;display:grid;gap:8px}.rsum div{display:flex;justify-content:space-between;font-size:17px}
+.rsum b{color:var(--gold)}
+.empty{color:var(--mut);text-align:center;padding:20px}
+.danger{margin-top:16px;width:100%;background:#2a1020;color:var(--red);border:1px solid var(--red);padding:14px;border-radius:14px;font-weight:800}
+/* toast + modal + fab */
+#toast{position:fixed;left:50%;bottom:90px;transform:translate(-50%,30px);background:#1c0a16;border:1px solid var(--red);color:#fff;padding:12px 20px;border-radius:14px;opacity:0;pointer-events:none;transition:.3s;z-index:99;max-width:90%;text-align:center;font-weight:700}
+#toast.show{opacity:1;transform:translate(-50%,0)}#toast.ok{background:#07200f;border-color:var(--green)}
+.modal{position:fixed;inset:0;background:#000c;z-index:200;display:flex;align-items:center;justify-content:center;padding:20px}
+.mbox{background:var(--card2);border:1px solid var(--pink);border-radius:20px;padding:24px;max-width:360px;text-align:center}
+.mbox h3{margin-bottom:8px;font-size:22px}.mbox p{color:var(--mut);margin-bottom:18px}
+.mbox .row{display:flex;gap:10px}.mbox button{flex:1;padding:13px;border-radius:12px;font-weight:800}
+.fab{position:fixed;right:16px;bottom:max(16px,env(safe-area-inset-bottom));z-index:60;background:linear-gradient(90deg,var(--neon),var(--pink));color:#05060c;font-weight:800;padding:14px 20px;border-radius:30px;box-shadow:0 0 24px #ff2bd677}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes shake{25%{transform:translateX(-7px)}75%{transform:translateX(7px)}}
+
+/* companies (added) */
+.pimg img.logo{object-fit:contain;padding:24px;background:#fff}
+.cobar{grid-column:1/-1;display:flex;flex-direction:column;gap:10px}
+.cobar .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.cinfo{font-size:13px;color:var(--mut);line-height:1.4}
+.cinfo input{background:var(--card);border:1px solid var(--line);color:var(--txt);border-radius:8px;padding:6px 8px;width:100%;max-width:340px;margin-top:4px}
+.bd{display:inline-block;font-size:11px;font-weight:800;padding:2px 8px;border-radius:10px;border:1px solid}
+.bd.LIVE{color:var(--green);border-color:var(--green)}.bd.DELAYED{color:var(--gold);border-color:var(--gold)}.bd.CLOSE{color:var(--neon);border-color:var(--neon)}.bd.NA{color:var(--red);border-color:var(--red)}
+.cmeta{font-size:12.5px;color:var(--mut);line-height:1.45}.cmeta b{color:var(--txt)}
+.amt{width:100%;background:var(--card);border:1px solid var(--line);color:var(--txt);border-radius:10px;padding:10px;font-size:15px}
+.pf{grid-column:1/-1;background:linear-gradient(170deg,var(--card2),var(--card));border:1px solid var(--pink);border-radius:20px;padding:16px;overflow-x:auto}
+.pf h3{font-size:22px;margin-bottom:8px}.pf table{min-width:640px}.pf td:last-child,.pf th:last-child{text-align:left}
+.pf button{padding:6px 10px;border-radius:9px;background:#2a1020;color:var(--red);border:1px solid var(--red);font-weight:700;margin-right:4px;font-size:13px}
+.pimg img.flag{object-fit:contain;padding:14px;background:#0b0d18}
+.rk{position:absolute;top:12px;left:12px;background:linear-gradient(90deg,var(--neon),var(--pink));color:#05060c;font-weight:900;padding:4px 12px;border-radius:20px;z-index:2}
+.up{color:var(--green)}.dn{color:var(--red)}
+@media(max-width:820px){.grid{gap:10px}.pb{padding:10px}.pb h3{font-size:16px}.price{font-size:15px}.price small{font-size:11px}.acts button{padding:12px 4px;font-size:15px}.pimg .fb{font-size:54px}}
+@media(max-width:330px){.grid{grid-template-columns:1fr}}
+@media(max-width:820px){.grid{grid-template-columns:repeat(2,1fr)}.hrow .photo{width:46px;height:46px}.hname small{display:none}}
+@media(max-width:520px){.people{grid-template-columns:1fr}.pcard .ph{width:200px;height:200px}}
+</style>
+</head>
+<body>
+
+<section id="select" class="wrap">
+  <div class="hero">
+    <h1>💸 Spend Billionaire &amp; Leader Money</h1>
+    <p>Pick a billionaire. Spend it all. Can you do it?</p>
+  </div>
+  <div class="people" id="people"></div>
+</section>
+
+<section id="top100" class="wrap hidden"></section>
+
+<section id="game" class="hidden">
+  <header>
+    <div class="hrow">
+      <div class="photo" id="hPhoto"></div>
+      <div class="hname"><span id="hName"></span><small id="hStart"></small></div>
+      <div class="bal"><b id="hBal">$0</b><small>Available</small></div>
+    </div>
+    <div class="hrow2">
+      <span class="stat">Spent: <b id="hSpent">$0</b></span>
+      <span class="stat">· <b id="hPct">0%</b> spent</span>
+      <div class="spacer">
+        <button class="tb" id="musicBtn">🎵 Music ON</button>
+        <input type="range" id="volSlider" min="0" max="100" value="70" aria-label="Volume" title="Volume" style="width:72px;accent-color:var(--neon)">
+        <button class="tb" id="curBtn">$ USD</button>
+        <button class="tb" id="backBtn">👤</button>
+      </div>
+      <div class="pbar"><i id="bar"></i></div>
+    </div>
+  </header>
+  <div class="wrap">
+    <h2 class="ctitle" id="cTitle">ALL ITEMS</h2>
+    <div class="cats" id="cats"></div>
+    <div class="grid" id="grid"></div>
+    <div class="receipt" id="receipt">
+      <h2>🧾 Shopping Receipt</h2>
+      <div class="rhead"><div class="photo" id="rPhoto"></div><div><b id="rName" style="font-size:20px"></b><div class="stat" id="rDate"></div></div></div>
+      <div id="rBody"></div>
+      <div class="rsum">
+        <div><span>Total spent</span><b id="rSpent"></b></div>
+        <div><span>Remaining balance</span><b id="rLeft" style="color:var(--green)"></b></div>
+        <div><span>Money spent</span><b id="rPct"></b></div>
+      </div>
+      <button class="danger" id="resetBtn">🔄 Reset Game</button>
+    </div>
+  </div>
+  <button class="fab" id="fab">🧾 Receipt</button>
+</section>
+
+<div id="toast"></div>
+<div class="modal hidden" id="modal"><div class="mbox"><h3 id="mTitle"></h3><p id="mText"></p>
+  <div class="row"><button style="background:var(--card);border:1px solid var(--line)" id="mNo">Cancel</button><button style="background:var(--red);color:#fff" id="mYes">Yes, reset</button></div></div></div>
+
+<script>
+"use strict";
+/* ================= CONFIG & DATA (edit here) ================= */
+const RATE = 83; // demo: $1 = ₹83
+const CATS = [
+  {id:"all",label:"🛒 All Items",title:"ALL ITEMS"},
+  {id:"tech",label:"🤖 Technology",title:"TECHNOLOGY"},
+  {id:"military",label:"🪖 Military",title:"MILITARY"},
+  {id:"cars",label:"🏎️ Cars",title:"CARS"},
+  {id:"realestate",label:"🏝️ Real Estate",title:"REAL ESTATE"},
+  {id:"companies",label:"🏢 Companies",title:"COMPANIES"},
+  {id:"countries",label:"🌍 Countries",title:"COUNTRIES"}
+];
+/* image: "wiki:Article_Title" -> photo loaded live from Wikipedia/Wikimedia Commons, or any direct https URL.
+   If a photo can't load, a styled emoji fallback ("emoji") is shown automatically. */
+const P = (id,name,category,priceUSD,image,emoji,description)=>({id,name,category,priceUSD,priceINR:priceUSD*RATE,image,emoji,description});
+const PRODUCTS = [
+  P("bugatti","Bugatti Chiron","cars",3000000,"wiki:Bugatti_Chiron","🏎️","Hypercar with 1,500 hp and a top speed above 420 km/h."),
+  P("rolls","Rolls-Royce Phantom","cars",500000,"wiki:Rolls-Royce_Phantom_VIII","🚘","The ultimate silent luxury limousine, hand built."),
+  P("lambo","Lamborghini Revuelto","cars",600000,"wiki:Lamborghini_Revuelto","🚗","V12 hybrid supercar with wild, aggressive styling."),
+  P("ferrari","Ferrari SF90","cars",600000,"wiki:Ferrari_SF90_Stradale","🔴","Plug-in hybrid Ferrari with 986 hp of pure speed."),
+  P("optimus","Tesla Optimus Robot","tech",30000,"wiki:Optimus_(robot)","🤖","A humanoid helper that does chores and factory work."),
+  P("humanoid","Humanoid Robot","tech",100000,"wiki:Humanoid_robot","🦾","Advanced AI robot that walks, talks and assists you."),
+  P("supercomp","Supercomputer","tech",100000000,"wiki:Supercomputer","🖥️","Exascale computing power for AI and science."),
+  P("satellite","Private Satellite","tech",50000000,"wiki:Communications_satellite","🛰️","Your own satellite orbiting Earth."),
+  P("tank","Military Tank","military",10000000,"wiki:Main_battle_tank","🪖","Heavily armoured main battle tank."),
+  P("jet","Fighter Jet","military",100000000,"wiki:Fighter_aircraft","✈️","Supersonic stealth fighter aircraft."),
+  P("carrier","Aircraft Carrier","military",13000000000,"wiki:Aircraft_carrier","🚢","A floating airbase carrying dozens of jets."),
+  P("sub","Submarine","military",3000000000,"wiki:Submarine","⚓","Nuclear-powered stealth submarine."),
+  P("mansion","Luxury Mansion","realestate",100000000,"wiki:Mansion","🏰","Palatial estate with pools, cinema and gardens."),
+  P("island","Private Island","realestate",200000000,"wiki:Private_island","🏝️","Your own tropical island paradise."),
+  P("skyscraper","Skyscraper","realestate",1000000000,"wiki:Skyscraper","🏙️","A giant tower dominating the skyline."),
+  P("yacht","Luxury Yacht","realestate",500000000,"wiki:Superyacht","🛥️","Mega yacht with helipad, spa and crew.")
+];
+/* photos: tries each source in order, then falls back to initials */
+const PEOPLE = [
+  {id:"elon",name:"Elon Musk",worth:250e9,wiki:"Elon_Musk",file:"Elon_Musk_Royal_Society_(crop2).jpg",init:"EM"},
+  {id:"mukesh",name:"Mukesh Ambani",worth:115e9,wiki:"Mukesh_Ambani",file:"Mukesh_Ambani.jpg",init:"MA"},
+  {id:"trump",name:"Donald Trump",worth:5e9,wiki:"Donald_Trump",file:"Donald_Trump_official_portrait_(2025).jpg",init:"DT"},
+  {id:"elvish",name:"Elvish Yadav",worth:5e6,wiki:"Elvish_Yadav",file:"Elvish_Yadav.jpg",init:"EY"},
+  {id:"leaders",name:"World Leaders",worth:1e12,wiki:null,file:null,init:"🌍",note:"Fictional combined budget"}
+];
+
+/* ================= STATE ================= */
+const S = {person:null,owned:{},cur:"USD",cat:"all",music:true,shown:0};
+const $ = id=>document.getElementById(id);
+const wikiCache = {};
+
+/* ================= FORMATTING ================= */
+function num(n,d=2){return n.toLocaleString("en-US",{maximumFractionDigits:d,minimumFractionDigits:0})}
+function fmtUSD(v){
+  v=Math.max(0,v);
+  if(v>=1e12)return "$"+num(v/1e12)+" Trillion";
+  if(v>=1e9)return "$"+num(v/1e9)+" Billion";
+  if(v>=1e6)return "$"+num(v/1e6)+" Million";
+  return "$"+num(v,0);
+}
+function fmtINR(usd){
+  const v=Math.max(0,usd*RATE),cr=v/1e7;
+  if(cr>=1e5)return "₹"+num(cr/1e5)+" Lakh Crore";
+  if(cr>=1)return "₹"+num(cr)+" Crore";
+  if(v>=1e5)return "₹"+num(v/1e5)+" Lakh";
+  return "₹"+num(v,0);
+}
+const fmt=(usd,cur=S.cur)=>cur==="USD"?fmtUSD(usd):fmtINR(usd);
+
+/* ================= IMAGES (with fallbacks) ================= */
+async function wikiThumb(title){
+  if(wikiCache[title]!==undefined)return wikiCache[title];
+  try{
+    const r=await fetch("https://en.wikipedia.org/api/rest_v1/page/summary/"+encodeURIComponent(title));
+    if(!r.ok)throw 0;
+    const j=await r.json();
+    wikiCache[title]=(j.originalimage&&j.thumbnail?j.thumbnail.source.replace(/\/\d+px-/,"/600px-"):null)||(j.thumbnail&&j.thumbnail.source)||null;
+  }catch(e){wikiCache[title]=null}
+  return wikiCache[title];
+}
+function tryLoad(url){return new Promise(res=>{const i=new Image();i.onload=()=>res(true);i.onerror=()=>res(false);i.src=url;setTimeout(()=>res(false),12000)})}
+/* Fills container `el` with the first working image of the candidates; else a fallback block. */
+async function fillImage(el,candidates,fallbackHTML,alt){
+  el.innerHTML='<div class="fb" style="opacity:.5">…</div>';
+  for(const c of candidates){
+    let url=typeof c==="function"?await c():c;
+    if(!url)continue;
+    if(await tryLoad(url)){el.innerHTML="";const im=document.createElement("img");im.src=url;im.alt=alt;im.loading="lazy";el.appendChild(im);return url}
+  }
+  el.innerHTML='<div class="fb">'+fallbackHTML+'</div>';return null;
+}
+const personSources=p=>p.wiki?[()=>wikiThumb(p.wiki),"https://commons.wikimedia.org/wiki/Special:FilePath/"+encodeURIComponent(p.file)+"?width=500"]:[];
+const productSources=pr=>pr.image.startsWith("wiki:")?[()=>wikiThumb(pr.image.slice(5))]:[pr.image];
+const photoCache={};
+async function personPhoto(el,p){
+  if(photoCache[p.id]){el.innerHTML='<img src="'+photoCache[p.id]+'" alt="'+p.name+'">';return}
+  const u=await fillImage(el,personSources(p),p.init,p.name);if(u)photoCache[p.id]=u;
+}
+
+/* ================= AUDIO ================= */
+/* Original synthesized music (no samples, no copyrighted songs): harmonium (reed-organ synth) playing a Raag Yaman style melody
+   over a tanpura-like drone (Sa-Pa-Sa) with a soft tabla keherwa rhythm and room reverb. 100 BPM, 4-bar loop (2nd round an octave higher).
+   Master volume slider; music button mutes music only; SFX briefly duck the music. */
+let AC=null,masterG,musicG,sfxG,reverbIn,noiseBuf,musicTimer=null,step=0,nextT=0;
+const STEP=60/100/2,MUSIC_LEVEL=.7;S.vol=.7;
+const mtof=m=>440*Math.pow(2,(m-69)/12);
+/* melody events per bar: [step, MIDI note, length in steps]  (Sa=C4=60; Yaman: C D E F# G A B) */
+const MEL=[[[0,64,3],[3,66,1],[4,67,3],[7,66,1],[8,64,2],[10,62,2],[12,64,4]],
+ [[0,67,3],[3,69,1],[4,71,3],[7,69,1],[8,67,2],[10,66,2],[12,67,4]],
+ [[0,71,2],[2,72,2],[4,71,2],[6,69,2],[8,67,3],[11,66,1],[12,64,2],[14,62,2]],
+ [[0,64,2],[2,62,2],[4,60,4],[8,62,2],[10,64,2],[12,60,4]]];
+function initAudio(){
+  if(AC){if(AC.state==="suspended")AC.resume();return}
+  const C=window.AudioContext||window.webkitAudio
